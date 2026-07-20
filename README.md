@@ -19,3 +19,5 @@ The sync also runs automatically on `npm install` via the `prepare` lifecycle ho
 
 1. Add a new `.md` file to `commands/`
 2. Run `npm run sync`
+
+**⚠️ Caution: Avoid overlapping commands.** Before adding a new command, review the existing commands below to ensure the scope doesn't overlap with an existing one. If a command name or description is too similar to another, the agent may invoke the wrong one ambiguously.
