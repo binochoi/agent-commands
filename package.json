@@ -1,0 +1,8 @@
+{
+  "name": "agent-commands",
+  "private": true,
+  "scripts": {
+    "sync": "cp commands/*.md ~/.claude/commands/ && cp commands/*.md ~/.config/opencode/commands/",
+    "prepare": "npm run sync"
+  }
+}
