@@ -2,7 +2,7 @@
   "name": "agent-commands",
   "private": true,
   "scripts": {
-    "sync": "cp commands/*.md ~/.claude/commands/ && cp commands/*.md ~/.config/opencode/commands/",
+    "sync": "mkdir -p $HOME/.claude/commands $HOME/.config/opencode/commands && cp commands/*.md $HOME/.claude/commands/ && cp commands/*.md $HOME/.config/opencode/commands/",
     "prepare": "npm run sync"
   }
 }
