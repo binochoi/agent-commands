@@ -1,6 +1,6 @@
 ---
 description: Explain a plan, proposal, or design document — saves to .explain-codes/plan/
-allowed-tools: Read, Grep, Glob, Bash(git log:*), Bash(git diff:*), Bash(gh pr view:*), WebFetch, Write
+allowed-tools: Read, Grep, Glob, Bash(git log:*), Bash(git diff:*), Bash(git remote:*), Bash(git rev-parse:*), Bash(gh pr view:*), WebFetch, Write
 ---
 
 Target: $ARGUMENTS
@@ -8,6 +8,10 @@ Target: $ARGUMENTS
 Explain the specified plan, proposal, design doc, or RFC. The argument is a file path, PR URL, issue URL, or free-text description.
 
 Write the explanation to `~/.config/.explainer-codes/plan/YYYY-MM-DD-<slug>.md`, where `<slug>` is a short kebab-case identifier derived from the target. Create the directory with `mkdir -p ~/.config/.explainer-codes/plan` if it does not exist.
+
+Before writing, determine:
+- `repositoryName`: derived from `git remote get-url origin` (the repo name, stripped of owner and `.git`); if there is no remote, use the basename of `git rev-parse --show-toplevel` instead.
+- `worktreeName`: the basename of `git rev-parse --show-toplevel`.
 
 The file must contain these sections:
 
@@ -41,5 +45,13 @@ Create exactly five multiple-choice questions that test understanding of this pl
 - Write in the clarity and flow of Martin Kleppmann — engaging, classic style, smooth transitions between sections.
 - Use callouts (blockquotes) for key concepts, definitions, and edge cases.
 - Use ASCII diagrams (not images) when helpful.
-- Start the file with a title line `# <target>: <one-sentence summary>`.
+- Start the file with YAML front matter, not a heading:
+
+  ```yaml
+  ---
+  title: <one-sentence summary>
+  repositoryName: <repositoryName>
+  worktreeName: <worktreeName>
+  ---
+  ```
 - Answer in Korean.

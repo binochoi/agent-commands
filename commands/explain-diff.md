@@ -1,6 +1,6 @@
 ---
 description: Explain a code change, diff, branch, or PR — saves to .explain-codes/diff/
-allowed-tools: Read, Grep, Glob, Bash(git diff:*), Bash(git log:*), Bash(git show:*), Bash(gh pr view:*), WebFetch, Write
+allowed-tools: Read, Grep, Glob, Bash(git diff:*), Bash(git log:*), Bash(git show:*), Bash(git remote:*), Bash(git rev-parse:*), Bash(gh pr view:*), WebFetch, Write
 ---
 
 Target: $ARGUMENTS
@@ -8,6 +8,10 @@ Target: $ARGUMENTS
 Explain the specified code change. The argument is a branch name, commit range, PR URL, or "HEAD" (default).
 
 Write the explanation to `~/.config/.explainer-codes/diff/YYYY-MM-DD-<slug>.md`, where `<slug>` is a short kebab-case identifier derived from the target. Create the directory with `mkdir -p ~/.config/.explainer-codes/diff` if it does not exist.
+
+Before writing, determine:
+- `repositoryName`: derived from `git remote get-url origin` (the repo name, stripped of owner and `.git`); if there is no remote, use the basename of `git rev-parse --show-toplevel` instead.
+- `worktreeName`: the basename of `git rev-parse --show-toplevel`.
 
 The file must contain these sections:
 
@@ -36,5 +40,13 @@ Create exactly five multiple-choice questions that test understanding of this PR
 - Write in the clarity and flow of Martin Kleppmann — engaging, classic style, smooth transitions between sections.
 - Use callouts (blockquotes) for key concepts, definitions, and edge cases.
 - Use ASCII diagrams (not images) when helpful.
-- Start the file with a title line `# <target>: <one-sentence summary>`.
+- Start the file with YAML front matter, not a heading:
+
+  ```yaml
+  ---
+  title: <one-sentence summary>
+  repositoryName: <repositoryName>
+  worktreeName: <worktreeName>
+  ---
+  ```
 - Answer in Korean.
