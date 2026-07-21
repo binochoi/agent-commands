@@ -1,13 +1,15 @@
 ---
-description: Produce a rich markdown explanation of a code change, diff, branch, or PR
-allowed-tools: Read, Grep, Glob, Bash(git diff:*), Bash(git log:*), Bash(git show:*), Bash(gh pr view:*), WebFetch, Bash(mkdir *), Bash(cp *), Write
+description: Explain a code change, diff, branch, or PR — saves to .explain-codes/diff/
+allowed-tools: Read, Grep, Glob, Bash(git diff:*), Bash(git log:*), Bash(git show:*), Bash(gh pr view:*), WebFetch, Write
 ---
 
 Target: $ARGUMENTS
 
 Explain the specified code change. The argument is a branch name, commit range, PR URL, or "HEAD" (default).
 
-Produce a comprehensive explanation with these four sections:
+Write the explanation to `.explain-codes/diff/YYYY-MM-DD-<slug>.md` (relative to repo root), where `<slug>` is a short kebab-case identifier derived from the target. Create the directory if it does not exist.
+
+The file must contain these sections:
 
 ## Background
 
@@ -30,13 +32,9 @@ Create exactly five multiple-choice questions that test understanding of this PR
 ## Rules
 
 - Do not ask clarifying questions. If the target is ambiguous, assume HEAD.
-- Do not produce HTML. Return everything as plain markdown.
+- Do not produce HTML. Write everything as plain markdown to the file path above.
 - Write in the clarity and flow of Martin Kleppmann — engaging, classic style, smooth transitions between sections.
 - Use callouts (blockquotes) for key concepts, definitions, and edge cases.
 - Use ASCII diagrams (not images) when helpful.
-- State the diff target and a one-sentence summary at the top.
+- Start the file with a title line `# <target>: <one-sentence summary>`.
 - Answer in Korean.
-- Output: save the explanation to `~/.config/.explain-diff/explains/YYYY-MM-DD-<slug>.md`.
-  Create the directory if it does not exist. Use today's date and a short
-  slug derived from the target (e.g., `2026-07-22-fix-auth-timeout.md`).
-  At the end, print the file path.
