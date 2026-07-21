@@ -7,7 +7,7 @@ Target: $ARGUMENTS
 
 Explain the specified code change. The argument is a branch name, commit range, PR URL, or "HEAD" (default).
 
-Write the explanation to `.explain-codes/diff/YYYY-MM-DD-<slug>.md` (relative to repo root), where `<slug>` is a short kebab-case identifier derived from the target. Create the directory if it does not exist.
+Write the explanation to `~/.config/.explainer-codes/diff/YYYY-MM-DD-<slug>.md`, where `<slug>` is a short kebab-case identifier derived from the target. Create the directory with `mkdir -p ~/.config/.explainer-codes/diff` if it does not exist.
 
 The file must contain these sections:
 

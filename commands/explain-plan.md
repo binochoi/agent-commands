@@ -7,7 +7,7 @@ Target: $ARGUMENTS
 
 Explain the specified plan, proposal, design doc, or RFC. The argument is a file path, PR URL, issue URL, or free-text description.
 
-Write the explanation to `.explain-codes/plan/YYYY-MM-DD-<slug>.md` (relative to repo root), where `<slug>` is a short kebab-case identifier derived from the target. Create the directory if it does not exist.
+Write the explanation to `~/.config/.explainer-codes/plan/YYYY-MM-DD-<slug>.md`, where `<slug>` is a short kebab-case identifier derived from the target. Create the directory with `mkdir -p ~/.config/.explainer-codes/plan` if it does not exist.
 
 The file must contain these sections:
 
