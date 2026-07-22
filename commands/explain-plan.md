@@ -5,7 +5,7 @@ allowed-tools: Read, Grep, Glob, Bash(git log:*), Bash(git diff:*), Bash(git rem
 
 Target: $ARGUMENTS
 
-Explain the specified plan, proposal, design doc, or RFC. The argument is a file path, PR URL, issue URL, or free-text description.
+Explain the specified plan, proposal, design doc, or RFC. The argument is a file path, PR URL, issue URL, or free-text description. If no argument is given, treat the plan, proposal, or design discussed so far in the current conversation as the target.
 
 Write the explanation to `~/.config/.explainer-codes/plan/YYYY-MM-DD-<slug>.md`, where `<slug>` is a short kebab-case identifier derived from the target. Create the directory with `mkdir -p ~/.config/.explainer-codes/plan` if it does not exist.
 
@@ -40,7 +40,7 @@ Create exactly five multiple-choice questions that test understanding of this pl
 
 ## Rules
 
-- Do not ask clarifying questions. If the target is ambiguous, assume the reader wants a general explainer for the concept named.
+- Do not ask clarifying questions. If no argument is given, summarize the plan/design discussed earlier in this conversation. If the target is otherwise ambiguous, assume the reader wants a general explainer for the concept named.
 - Do not produce HTML. Write everything as plain markdown to the file path above.
 - Write in the clarity and flow of Martin Kleppmann — engaging, classic style, smooth transitions between sections.
 - Use callouts (blockquotes) for key concepts, definitions, and edge cases.
