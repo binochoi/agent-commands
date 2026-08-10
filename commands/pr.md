@@ -6,7 +6,7 @@ allowed-tools: Read, Grep, Glob, Bash(git status:*), Bash(git branch:*), Bash(gi
 Optional title/notes: $ARGUMENTS
 
 Take the current working-tree changes exactly as they are and open a pull
-request with a **detailed** body — the same depth and style as the
+request with a **detailed but readable** body — the same depth and style as the
 `explain-diff` command, minus the quiz. Do not refactor, clean up, or "improve"
 the diff first.
 
@@ -30,24 +30,35 @@ the diff first.
 
 ## PR body structure
 
-The body must contain these sections (no quiz):
+The body must contain these sections, in this order:
+
+### 요약 (TL;DR)
+
+The reviewer should grasp the whole change in ~15 seconds, before any
+background. Write 3–4 lines (or a short bullet list) answering: **무엇을** 왜
+바꿨는지, **어떻게** 바꿨는지, 그리고 **리뷰 시 주목할 곳**. A small table
+(변경 전 / 변경 후) or a one-line summary of each key file works well. No deep
+background here — just the essence.
 
 ### 배경 (Background)
 
-Explain the existing system relevant to this change. Explore surrounding code
-broadly. Include two layers:
-- A deep background for beginners (note that it can be skipped if already familiar)
-- A narrower background directly relevant to the change
+Only the existing-system context a reviewer needs to make sense of this change.
+Explore surrounding code, but keep it tight:
+- A deeper background for newcomers — mark it as skippable if already familiar
+- The narrower background directly relevant to this change
+Cut context the reviewer won't use.
 
 ### 핵심 아이디어 (Intuition)
 
-Explain the core intuition for the change. Focus on essence, not full details.
-Use concrete examples with toy data. Use ASCII diagrams and tables liberally.
+Explain the core intuition, essence first — not full details. Prefer a concrete
+example with toy data over abstract prose. Use ASCII diagrams and tables where
+they make the shape clearer.
 
 ### 변경 내용 (Code)
 
-Do a high-level walkthrough of the changes. Group/order the changes in an
-understandable way. Show key code snippets.
+A high-level walkthrough of the changes, grouped and ordered so they're easy to
+follow. Show key code snippets; skip the boilerplate. Point out anything the
+reviewer should look at closely.
 
 ## Rules
 
@@ -57,9 +68,22 @@ understandable way. Show key code snippets.
 - If the working tree is clean and the branch is already pushed with no new
   commits vs. the base, say there is nothing to PR instead of creating an empty one.
 - Never force-push, never target or push directly to the default branch.
-- Write in the clarity and flow of Martin Kleppmann — engaging, classic style,
-  smooth transitions between sections.
+
+### Readability (write to be understood fast)
+
+- **Lead with the point (BLUF).** Every section opens with its key sentence;
+  supporting detail follows.
+- **Short paragraphs, one idea each** — aim for 3–4 sentences, not walls of text.
+- **Plain language over jargon.** When a technical term is unavoidable, gloss it
+  in one line the first time it appears. Write to be understood, not to impress.
+- **Concise, not exhaustive.** Include what a reviewer needs to review well; cut
+  padding, restatement, and background they won't use.
+- **Show, don't just tell.** A concrete example with toy data beats a paragraph
+  of abstract explanation.
+- **Make it scannable.** Use headings, bullets, tables, and ASCII diagrams (not
+  images) so a reviewer can skim structure before reading prose.
 - Use callouts (blockquotes) for key concepts, definitions, and edge cases.
-- Use ASCII diagrams (not images) when helpful.
+- Aim for the clarity and flow of Martin Kleppmann — approachable and
+  well-connected, never verbose or stiff.
 - End PR bodies with:
   🤖 Generated with [Claude Code](https://claude.com/claude-code)
