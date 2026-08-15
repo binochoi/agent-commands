@@ -49,6 +49,8 @@ request. Do not refactor, clean up, or "improve" the diff first.
 - If the working tree is clean and the branch is already pushed with no new
   commits vs. the base, say there is nothing to PR instead of creating an empty one.
 - Never force-push, never target or push directly to the default branch.
+- 본문은 쉬운 한글로 쓴다. 영어 약어·외래어(TL;DR 등) 대신 쉬운 우리말로 풀어
+  쓰고, 어려운 말보다 누구나 아는 쉬운 말을 고른다.
 - The terminate step (step 7) is a hard `kill`, not a graceful exit — the
   session ends immediately when it runs. Only run it after the PR is confirmed
   created. If the working tree is clean / there is nothing to PR, or any step

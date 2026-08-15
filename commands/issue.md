@@ -1,14 +1,14 @@
 ---
-description: Register the plan as a detailed, explain-plan-style GitHub issue
+description: Register the plan as a GitHub issue — summary first, plain and easy to read
 allowed-tools: Read, Grep, Glob, Bash(git status:*), Bash(git branch:*), Bash(git log:*), Bash(git diff:*), Bash(git remote:*), Bash(git rev-parse:*), Bash(gh issue create:*), Bash(gh issue edit:*), Bash(gh issue view:*), Bash(gh repo view:*), Bash(gh label list:*), Write
 ---
 
 Plan/topic to register: $ARGUMENTS
 
 Take the plan for the work to be done and register it as a GitHub issue on the
-current repo, with a **detailed but readable** body — the same depth and style
-as the `explain-plan` command, minus the quiz. This is about *upcoming work*,
-not existing changes — describe what should be done, not a diff.
+current repo. Lead with a short summary, then add only as much detail as the
+work needs. This is about *upcoming work*, not existing changes — describe what
+should be done, not a diff.
 
 If `$ARGUMENTS` points at an existing issue (a `#N` reference, a bare issue
 number, or an issue URL), **update that issue** instead of creating a new one —
@@ -44,47 +44,30 @@ When `$ARGUMENTS` targets an existing issue:
    as the base.
 2. Ground the update in the codebase (Read/Grep/Glob, `git log`/`git diff`), the
    same as a fresh issue.
-3. Produce an updated body using the same section structure below: keep what
-   still applies, and fold in the current conversation plan (plus any extra
-   guidance in `$ARGUMENTS`). Do not blindly discard existing content.
+3. Produce an updated body in the same shape as below (요약 먼저, 세부는 그
+   아래): keep what still applies, and fold in the current conversation plan
+   (plus any extra guidance in `$ARGUMENTS`). Do not blindly discard existing
+   content.
 4. Write the updated body to a temp file and apply it with
    `gh issue edit <N> --body-file <tempfile>` (add `--title` only if the title
    should change). Keep the title and body **in Korean**.
 5. Print the issue URL and stop.
 
-## Issue body structure
+## 본문 구조
 
-The body must contain these sections, in this order:
+정해진 섹션을 채우는 게 아니라, **요약을 맨 위에 두고 그 아래에 필요한 만큼만**
+세부 내용을 적는다.
 
-### 요약 (TL;DR)
+1. 맨 위에 **요약**. 배경 설명보다 먼저, 3~4줄(또는 짧은 목록)로 핵심만:
+   무엇을 왜 바꾸는지 · 어떻게 풀지 · 어디가 바뀌는지. 바쁜 사람이 요약만
+   읽어도 전체 그림이 잡히게. (문제 / 해결 / 바뀌는 곳 표도 좋다.)
+2. 그 아래에 **세부 내용**을 필요한 만큼만 이어 적는다. 다룰 만한 것: 왜
+   필요한지(배경), 어떻게 풀지(방법·설계와 고른 이유), 할 일 순서(여러
+   단계면 체크리스트로). 변경이 작으면 짧게, 크면 자세히 — 필요 없는 부분은
+   그냥 생략한다. 정해진 섹션 수를 채우려 하지 말 것.
 
-The busiest reader should get the whole picture in ~15 seconds, before any
-background. Write 3–4 lines (or a short bullet list) answering: **무엇을** 왜
-바꾸려 하는지, **어떻게** 풀지, 그리고 **영향 범위**(어디가 바뀌나). A small
-table (문제 / 해결 / 영향 범위) works well here. No deep background — just the
-essence.
-
-### 배경 (Context)
-
-Only what a reader needs to understand *why this plan exists*. Describe what is
-broken, missing, or suboptimal, and any prior solutions or discussions in the
-codebase (issues, prior PRs, TODO comments). Keep it tight — cut tangents. If
-some context is optional for those already familiar, say so and let them skip.
-
-### 설계 (Design)
-
-Explain the proposed solution, essence first:
-- Core idea and key design decisions
-- Trade-offs (what was considered and rejected, and why)
-- Data model, API surface, or component architecture — whichever is relevant
-Prefer a concrete example (toy data walked through the design) over abstract
-prose. Use ASCII diagrams and tables where they make the shape clearer.
-
-### 구현 계획 (Implementation Plan)
-
-Break the work into ordered steps (a checklist when there are multiple). For
-each step, briefly: what changes, how to verify it (tests, manual checks), and
-any migration or backwards-compatibility concern. Keep each step scannable.
+말보다 예시가 낫다: 간단한 예시 데이터를 설계에 대입해 보여주면 좋다. 구조가
+한눈에 보이도록 (그림 대신) 아스키 그림과 표를 쓴다.
 
 ## Rules
 
@@ -95,21 +78,19 @@ any migration or backwards-compatibility concern. Keep each step scannable.
   issue.
 - Describe the work as a plan (what to do), not as a completed change.
 
-### Readability (write to be understood fast)
+### 쉽게 쓰기 (읽자마자 이해되게)
 
-- **Lead with the point (BLUF).** Every section opens with its key sentence;
-  supporting detail follows.
-- **Short paragraphs, one idea each** — aim for 3–4 sentences, not walls of text.
-- **Plain language over jargon.** When a technical term is unavoidable, gloss it
-  in one line the first time it appears. Write to be understood, not to impress.
-- **Concise, not exhaustive.** Include what a reader needs to act; cut padding,
-  restatement, and background they won't use.
-- **Show, don't just tell.** A concrete example with toy data beats a paragraph
-  of abstract explanation.
-- **Make it scannable.** Use headings, bullets, tables, and ASCII diagrams (not
-  images) so a reader can skim structure before reading prose.
-- Use callouts (blockquotes) for key concepts, definitions, and edge cases.
-- Aim for the clarity and flow of Martin Kleppmann — approachable and
-  well-connected, never verbose or stiff.
-- End issue bodies with:
+- **요약을 맨 앞에.** 각 부분은 핵심 문장으로 시작하고 부연은 뒤에 붙인다.
+- **쉬운 단어로.** 처음 보는 어려운 말 대신 누구나 아는 쉬운 말을 쓴다.
+  잘 보이려 어렵게 쓰지 말 것.
+- **영어 대신 한글.** 영어 약어·외래어(TL;DR, BLUF 등)를 쓰지 말고 한글로
+  풀어 쓴다. 코드에 실제 쓰이는 이름이나, 한글로 옮기면 오히려 헷갈리는
+  기술 용어만 예외로 영어를 쓰되, 처음 나올 때 한 줄로 뜻을 덧붙인다.
+- **짧게.** 필요한 것만 적고 군더더기·반복·안 쓸 배경은 뺀다. 한 문단에는
+  한 가지 생각만, 3~4문장 안쪽으로.
+- **보여주기.** 추상적인 설명보다 간단한 예시 데이터가 낫다.
+- **훑어보기 좋게.** 제목·글머리표·표·(그림 대신) 아스키 그림으로 구조가
+  한눈에 보이게 한다.
+- 중요한 개념·정의·주의점은 인용문(>)으로 표시한다.
+- 이슈 본문 끝에는 다음을 붙인다:
   🤖 Generated with [Claude Code](https://claude.com/claude-code)

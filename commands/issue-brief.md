@@ -56,5 +56,7 @@ When `$ARGUMENTS` targets an existing issue:
 - Do not write, edit, or commit any code — this only creates or updates the
   issue.
 - Describe the work as a plan (what to do), not as a completed change.
+- 본문은 쉬운 한글로 쓴다. 영어 약어·외래어(TL;DR 등) 대신 쉬운 우리말로 풀어
+  쓰고, 어려운 말보다 누구나 아는 쉬운 말을 고른다.
 - End issue bodies with:
   🤖 Generated with [Claude Code](https://claude.com/claude-code)
