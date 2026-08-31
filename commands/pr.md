@@ -9,11 +9,19 @@ Take the current working-tree changes exactly as they are and open a pull
 request. Lead with a short summary, then add only as much detail as the change
 needs. Do not refactor, clean up, or "improve" the diff first.
 
+If there are no changes yet, do not ask what to do — implement the work this
+conversation already discussed or agreed on, then open the PR.
+
 ## Steps
 
 1. Run `git status` and `git diff` to see what will go into the PR. Read the
    surrounding code broadly (Read/Grep/Glob) so the body is grounded in the real
    codebase, not guesses.
+   - If the working tree is clean and there are no new commits vs. the base,
+     look back over this conversation for work that was discussed or agreed but
+     not yet implemented, and implement it now — then continue the steps below.
+     Only if there is genuinely nothing to ship (no changes **and** no pending
+     discussed work) do you report there is nothing to PR and stop.
 2. Determine the current branch. If it is the default branch (`main`/`master`),
    create a new branch first (derive a short kebab-case name from the changes)
    and switch to it. Otherwise stay on the current branch.
@@ -50,9 +58,12 @@ needs. Do not refactor, clean up, or "improve" the diff first.
 
 - Do not ask for confirmation or clarifying questions. Push and open the PR
   directly. If anything is ambiguous, assume the obvious default and proceed.
-- Ship the current changes as-is — never edit source files to polish the diff.
-- If the working tree is clean and the branch is already pushed with no new
-  commits vs. the base, say there is nothing to PR instead of creating an empty one.
+- Ship the current changes as-is — never edit an existing diff to polish it.
+  (This is not about refusing to write code: if there is no diff yet but the
+  conversation already settled what to build, implement that first, then PR.)
+- Only when there are no changes **and** the conversation has no discussed,
+  unimplemented work to build should you say there is nothing to PR. Never stop
+  to ask what to do just because the working tree is clean.
 - Never force-push, never target or push directly to the default branch.
 
 ### 쉽게 쓰기 (읽자마자 이해되게)

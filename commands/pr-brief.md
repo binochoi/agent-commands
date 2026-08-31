@@ -8,9 +8,17 @@ Optional title/notes: $ARGUMENTS
 Take the current working-tree changes exactly as they are and open a pull
 request. Do not refactor, clean up, or "improve" the diff first.
 
+If there are no changes yet, do not ask what to do — implement the work this
+conversation already discussed or agreed on, then open the PR.
+
 ## Steps
 
 1. Run `git status` and `git diff` to see what will go into the PR.
+   - If the working tree is clean and there are no new commits vs. the base,
+     look back over this conversation for work that was discussed or agreed but
+     not yet implemented, and implement it now — then continue the steps below.
+     Only if there is genuinely nothing to ship (no changes **and** no pending
+     discussed work) do you report there is nothing to PR and stop.
 2. Determine the current branch. If it is the default branch (`main`/`master`),
    create a new branch first (derive a short kebab-case name from the changes)
    and switch to it. Otherwise stay on the current branch.
@@ -45,15 +53,18 @@ request. Do not refactor, clean up, or "improve" the diff first.
 
 - Do not ask for confirmation or clarifying questions. Push and open the PR
   directly. If anything is ambiguous, assume the obvious default and proceed.
-- Ship the current changes as-is — never edit source files to polish the diff.
-- If the working tree is clean and the branch is already pushed with no new
-  commits vs. the base, say there is nothing to PR instead of creating an empty one.
+- Ship the current changes as-is — never edit an existing diff to polish it.
+  (This is not about refusing to write code: if there is no diff yet but the
+  conversation already settled what to build, implement that first, then PR.)
+- Only when there are no changes **and** the conversation has no discussed,
+  unimplemented work to build should you say there is nothing to PR. Never stop
+  to ask what to do just because the working tree is clean.
 - Never force-push, never target or push directly to the default branch.
 - 본문은 쉬운 한글로 쓴다. 영어 약어·외래어(TL;DR 등) 대신 쉬운 우리말로 풀어
   쓰고, 어려운 말보다 누구나 아는 쉬운 말을 고른다.
 - The terminate step (step 7) is a hard `kill`, not a graceful exit — the
   session ends immediately when it runs. Only run it after the PR is confirmed
-  created. If the working tree is clean / there is nothing to PR, or any step
-  fails, do NOT run it: just stop normally.
+  created. If there was nothing to PR, or any step fails, do NOT run it: just
+  stop normally.
 - End PR bodies with:
   🤖 Generated with [Claude Code](https://claude.com/claude-code)
